@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">Sunshine</string>
+    <string name="day">Today, July 26</string>
+    <string name="max_temp">21°</string>
+    <string name="min_temp">8°</string>
+</resources>
