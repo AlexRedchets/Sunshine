@@ -14,7 +14,7 @@ public class MainActivity extends AppCompatActivity {
 
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
-                    .add(R.id.activity_main, new PlaceholderFragment())
+                    .add(R.id.activity_main, new ForecastFragment())
                     .commit();
         }
     }
