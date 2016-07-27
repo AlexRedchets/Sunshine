@@ -91,8 +91,9 @@ public class ForecastFragment extends Fragment {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Toast.makeText(getContext(), "You pushed " + adapter.getItem(i), Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(getContext(), DetailActivity.class);
+                String forecast = adapter.getItem(i);
+                Intent intent = new Intent(getContext(), DetailActivity.class)
+                        .putExtra(Intent.EXTRA_TEXT, forecast);
                 startActivity(intent);
 
             }
