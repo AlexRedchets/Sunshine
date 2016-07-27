@@ -6,6 +6,9 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -32,6 +35,7 @@ public class ForecastFragment extends Fragment {
 
         //Initialize view
         View view = inflater.inflate(R.layout.fragment_main, container, false);
+        setHasOptionsMenu(true);
         //Initialize adapter for list view
         ArrayAdapter<String> adapter;
 
@@ -138,6 +142,28 @@ public class ForecastFragment extends Fragment {
 
 
             return null;
+        }
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        // TODO Auto-generated method stub
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.forecastfragment, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // handle item selection
+        switch (item.getItemId()) {
+            case R.id.action_settings:
+                // do s.th.
+                return true;
+            case R.id.action_refresh:
+                // do s.th.
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
     }
 }
