@@ -323,7 +323,8 @@ public class ForecastFragment extends Fragment {
         // handle item selection
         switch (item.getItemId()) {
             case R.id.action_settings:
-                // do s.th.
+                Intent intent = new Intent(getContext(), SettingsActivity.class);
+                startActivity(intent);
                 return true;
             case R.id.action_refresh:
                 FetchWeatherTask fetchWeatherTask = new FetchWeatherTask();
