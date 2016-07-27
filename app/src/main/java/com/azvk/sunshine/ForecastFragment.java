@@ -53,6 +53,12 @@ public class ForecastFragment extends Fragment {
         setHasOptionsMenu(true);
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        updateWeather();
+    }
+
     @Nullable
     @Override
     public View onCreateView(final LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -60,24 +66,7 @@ public class ForecastFragment extends Fragment {
         //Initialize view
         View view = inflater.inflate(R.layout.fragment_main, container, false);
 
-        List<String> arrayList;
         ListView listView;
-
-        //String array for list view
-        String[] array = {"Today - Sunny - 88/63",
-                "Today - Sunny - 88/63",
-                "Today - Sunny - 88/63",
-                "Today - Sunny - 88/63",
-                "Today - Sunny - 88/63",
-                "Today - Sunny - 88/63",
-                "Today - Sunny - 88/63",
-                "Today - Sunny - 88/63",
-                "Today - Sunny - 88/63",
-                "Today - Sunny - 88/63",
-        };
-
-        //Convert string array into ArrayList
-        arrayList = new ArrayList<>(Arrays.asList(array));
 
         //Initialize adapter
         adapter = new ArrayAdapter<>(
@@ -87,7 +76,7 @@ public class ForecastFragment extends Fragment {
                 R.layout.list_item_forecast,
                 //TextView
                 R.id.list_item_forecast_textview,
-                arrayList);
+                new ArrayList<String >());
 
         //Initialize List View
         listView = (ListView) view.findViewById(R.id.listview_forecast);
@@ -332,14 +321,18 @@ public class ForecastFragment extends Fragment {
                 startActivity(intent);
                 return true;
             case R.id.action_refresh:
-                FetchWeatherTask fetchWeatherTask = new FetchWeatherTask();
-                SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
-                String location = prefs.getString(getString(R.string.pref_location_key),
-                        getString(R.string.pref_location_default));
-                fetchWeatherTask.execute(location);
+                updateWeather();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    private void updateWeather() {
+        FetchWeatherTask fetchWeatherTask = new FetchWeatherTask();
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        String location = prefs.getString(getString(R.string.pref_location_key),
+                getString(R.string.pref_location_default));
+        fetchWeatherTask.execute(location);
     }
 }
